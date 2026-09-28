@@ -1,0 +1,27 @@
+name: quality
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: |
+            any::dplyr
+            any::ggplot2
+            any::ompr
+            any::ompr.roi
+            any::readr
+            any::ROI
+            any::ROI.plugin.highs
+            any::scales
+            any::tidyr
+      - run: Rscript R/run_analysis.R
+      - run: Rscript tests/test_model.R
+
