@@ -1,8 +1,8 @@
 # Healthcare Capacity Optimisation in R
 
-A mixed-integer optimisation model that turns 26 weeks of diagnostic and therapeutic demand into a feasible, cost-minimising plan for 10 treatment rooms.
+A mixed-integer optimisation model for assigning 10 treatment rooms across 26 weeks of diagnostic and therapeutic demand while respecting clinician capacity and room-mode constraints.
 
-The business decision is not simply “how much capacity is available?” It is **which room mode should be opened in each week, when setup costs should be incurred, and how demand can be met without breaching clinician capacity**.
+The decision variables determine which room mode opens in each week, when setup costs are incurred and how activity is allocated without breaching clinician capacity.
 
 ## Executive result
 
@@ -49,9 +49,9 @@ Subject to:
 6. room allocations not exceeding mode-specific capacity; and
 7. setup costs being triggered when capacity is activated.
 
-## Why this is useful
+## Management output
 
-This project demonstrates prescriptive analytics rather than prediction. It makes the operational trade-off explicit: room configurations with more capacity can reduce feasibility risk, but incur higher fixed operating costs. The exported weekly plan lets a manager see demand coverage, unused staff capacity, opened room capacity and setup events.
+This is a prescriptive model rather than a prediction model. Room configurations with more capacity can reduce feasibility risk but incur higher fixed operating costs. The exported weekly plan shows demand coverage, unused staff capacity, opened room capacity and setup events.
 
 | Room schedule | Weekly utilisation |
 |---|---|
@@ -62,10 +62,10 @@ This project demonstrates prescriptive analytics rather than prediction. It make
 | Path | Purpose |
 |---|---|
 | `R/model.R` | Scenario data, MILP formulation and solution extraction |
-| `R/run_analysis.R` | Reproducible end-to-end run and exports |
+| `R/run_analysis.R` | Reproducible model run and exports |
 | `R/validate_outputs.R` | Headline and feasibility assertions |
 | `outputs/` | Weekly plan, room schedule and cost summary |
-| `figures/` | Decision-ready visual outputs |
+| `figures/` | Saved charts for the weekly plan and utilisation |
 | `tests/` | Structural tests for inputs and saved results |
 
 ## Reproduce
@@ -80,7 +80,7 @@ Rscript tests/test_model.R
 
 The optimisation uses the open-source HiGHS solver. It may return another room-level schedule with the same objective because symmetric rooms can produce multiple equivalent optima.
 
-## Improvements over the academic submission
+## Changes made for public release
 
 The public version removes interactive `View()` calls, uses project-relative paths, separates formulation from reporting, exports all decision tables, adds automated assertions and keeps the management narrative concise. The underlying formulation and headline result remain aligned with the submitted work.
 
@@ -93,5 +93,5 @@ The public version removes interactive `View()` calls, uses project-relative pat
 
 ## Author
 
-**Muhammad Ahmed Shoaib** — optimisation, operations analytics and decision support.
-
+**Muhammad Ahmed Shoaib**<br>
+Optimisation, operations analytics and decision support.
