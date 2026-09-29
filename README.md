@@ -4,6 +4,16 @@ A mixed-integer optimisation model for assigning 10 treatment rooms across 26 we
 
 The decision variables determine which room mode opens in each week, when setup costs are incurred and how activity is allocated without breaching clinician capacity.
 
+## Planning problem
+
+Healthcare capacity decisions are coupled across time. Opening an additional room can protect service capacity but increases operating and setup cost; keeping capacity too tight can make the weekly demand plan infeasible. The model formalises that trade-off over a complete 26-week horizon instead of optimising each week in isolation.
+
+The work translates a narrative case into an auditable mathematical programme: define the room-week choices, connect each choice to available diagnostic or therapeutic hours, account for clinician limits and charge for capacity activation. The output is a schedule that a manager can inspect, not only an objective value.
+
+## My contribution
+
+I translated the case into decision variables, constraints and a cost objective; implemented the model in R with `ompr` and HiGHS; checked feasibility against weekly demand and clinician capacity; compared the cost components; and converted the solution into room, week and utilisation views. For the public repository I separated the formulation from reporting, removed interactive dependencies, exported every decision table and added structural tests and headline-result assertions.
+
 ## Executive result
 
 | Result | Value |
@@ -52,6 +62,8 @@ Subject to:
 ## Management output
 
 This is a prescriptive model rather than a prediction model. Room configurations with more capacity can reduce feasibility risk but incur higher fixed operating costs. The exported weekly plan shows demand coverage, unused staff capacity, opened room capacity and setup events.
+
+The result provides a defensible base plan. In practice, managers could rerun the same formulation under higher demand, reduced clinician availability or alternative setup costs to see where the schedule becomes fragile and which additional capacity protects the service most efficiently.
 
 | Room schedule | Weekly utilisation |
 |---|---|
