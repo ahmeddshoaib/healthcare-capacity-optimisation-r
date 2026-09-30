@@ -12,7 +12,7 @@ The work translates a narrative case into an auditable mathematical programme: d
 
 ## My contribution
 
-I translated the case into decision variables, constraints and a cost objective; implemented the model in R with `ompr` and HiGHS; checked feasibility against weekly demand and clinician capacity; compared the cost components; and converted the solution into room, week and utilisation views. For the public repository I separated the formulation from reporting, removed interactive dependencies, exported every decision table and added structural tests and headline-result assertions.
+I translated the case into decision variables, constraints and a cost objective; implemented the model in R with `ompr` and HiGHS; checked feasibility against weekly demand and clinician capacity; compared the cost components; and converted the solution into room, week and utilisation views. The formulation, validation checks and management outputs are separated so the full decision can be followed from assumptions to final schedule.
 
 ## Executive result
 
@@ -80,21 +80,9 @@ The result provides a defensible base plan. In practice, managers could rerun th
 | `figures/` | Saved charts for the weekly plan and utilisation |
 | `tests/` | Structural tests for inputs and saved results |
 
-## Reproduce
+## Model traceability
 
-Install R 4.4+ and the packages listed in `requirements.R`, then run:
-
-```bash
-Rscript requirements.R
-Rscript R/run_analysis.R
-Rscript tests/test_model.R
-```
-
-The optimisation uses the open-source HiGHS solver. It may return another room-level schedule with the same objective because symmetric rooms can produce multiple equivalent optima.
-
-## Changes made for public release
-
-The public version removes interactive `View()` calls, uses project-relative paths, separates formulation from reporting, exports all decision tables, adds automated assertions and keeps the management narrative concise. The underlying formulation and headline result remain aligned with the submitted work.
+The repository contains the scenario assumptions, mathematical formulation, saved room schedule, weekly capacity views, cost summary and validation checks. The optimisation uses the open-source HiGHS solver. Symmetric rooms can produce different room-level schedules with the same objective, so the decision is evaluated through feasibility, total cost and capacity use rather than one arbitrary room label.
 
 ## Limitations
 
