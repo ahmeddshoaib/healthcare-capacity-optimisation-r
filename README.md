@@ -80,6 +80,17 @@ The result provides a defensible base plan. In practice, managers could rerun th
 | `figures/` | Saved charts for the weekly plan and utilisation |
 | `tests/` | Structural tests for inputs and saved results |
 
+## Run locally
+
+```bash
+Rscript requirements.R
+Rscript R/run_analysis.R
+Rscript tests/test_model.R
+Rscript R/validate_outputs.R
+```
+
+The model uses the scenario assumptions stored in the repository and the open-source HiGHS solver.
+
 ## Model traceability
 
 The repository contains the scenario assumptions, mathematical formulation, saved room schedule, weekly capacity views, cost summary and validation checks. The optimisation uses the open-source HiGHS solver. Symmetric rooms can produce different room-level schedules with the same objective, so the decision is evaluated through feasibility, total cost and capacity use rather than one arbitrary room label.
